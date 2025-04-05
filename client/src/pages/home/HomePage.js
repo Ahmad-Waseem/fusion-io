@@ -1,5 +1,5 @@
 import React from 'react';
-
+import GlowUpButton from '../../components/buttons/GlowUpButton';
 const HomePage = () => {
     return (
         <div className="font-sans text-gray-900">
@@ -88,7 +88,7 @@ const HomePage = () => {
                 <div>
                     <h2 className="text-3xl font-semibold mb-4">Get in Touch</h2>
                     <p className="text-lg mb-6">Have questions or feedback? We'd love to hear from you!</p>
-                    <a href="mailto:contact@fusion-io.com" className="bg-[var(--background)] text-gray-900 px-6 py-3 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300">Contact Us</a>
+                    <GlowUpButton color={"var(--web-secondary)"} href="mailto:contact@fusion-io.com">Contact Us</GlowUpButton>
                 </div>
             </section>
         </div>
