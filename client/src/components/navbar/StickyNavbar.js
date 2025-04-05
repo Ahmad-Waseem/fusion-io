@@ -3,7 +3,7 @@ import styles from './StickyNavbar.module.css';
 
 function Button() {
   return (
-    <button className={styles.button} data-text="Awesome">
+    <button className={styles.button}>
       <span className={styles.actualText}>&nbsp;&nbsp;FUSION.IO&nbsp;</span>
       <span aria-hidden="true" className={styles.hoverText} >&nbsp;&nbsp;FUSION.IO&nbsp;</span>
     </button>
