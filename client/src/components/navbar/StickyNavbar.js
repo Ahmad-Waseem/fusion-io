@@ -22,7 +22,7 @@ const StickyNavbar = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <header className="sticky inset-x-0 top-0 z-30 mx-auto w-full max-w-screen-md border border-gray-100 bg-white/80 py-3 shadow backdrop-blur-lg md:top-6 md:rounded-3xl lg:max-w-screen-lg">
+    <header className="fixed inset-x-0 z-30 mx-auto w-full max-w-screen-md border border-gray-100 bg-white/60 py-3 shadow backdrop-blur-lg md:rounded-3xl md:top-6 lg:max-w-screen-lg">
       <div className="px-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -46,14 +46,14 @@ const StickyNavbar = () => {
           {/* Buttons Section */}
           <div className="flex items-center gap-2">
             <button
-              className="hidden sm:inline-flex items-center justify-center rounded-xl bg-white px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset transition-all duration-300 text-[var(--text-color)] ring-gray-300 hover:[color:var(--host-primary)] hover:ring-[var(--host-primary)]"
+              className="hidden sm:inline-flex items-center justify-center rounded-xl bg-none px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset transition-all duration-300 text-[var(--text-color)] ring-gray-300 hover:[color:var(--host-primary)] hover:ring-[var(--host-primary)]"
               href="/login"
             >
               Host a Hackathon
             </button>
 
             <button className={`hidden md:inline-flex items-center justify-center rounded-xl px-3 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-blue-500 ${styles.glowbutton}`}>
-              Hackathon!
+              <strong>Hackathon!</strong>
             </button>
 
             {/* Mobile Login button */}

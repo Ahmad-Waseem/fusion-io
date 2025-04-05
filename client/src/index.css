@@ -4,38 +4,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Secular+One&family=Open+Sans:wght@400;600&display=swap');
 
 @layer utilities {
-  .navbar-height {
+  /* .navbar-height {
     height: 4rem; /* Default: 64px */
-  }
-  body {
-    margin: 0;
-    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  .page-height {
-    height: calc(100vh - 4rem);
-  }
-
-  @media (min-width: 768px) {
-    .navbar-height {
-      height: 5rem; /* 80px */
-    }
-
-    .page-height {
-      height: calc(100vh - 5rem);
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .navbar-height {
-      height: 6rem; /* 96px */
-    }
-
-    .page-height {
-      height: calc(100vh - 6rem);
-    }
-  }
 }
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.page-height {
+  height: calc(100vh - 4rem);
+}
+/* 
+@media (min-width: 768px) {
+  .navbar-height {
+    height: 5rem;}
+    
+  
+
+  .page-height {
+    height: calc(100vh - 5rem);
+  }
+} 
+*/
+/* 
+@media (min-width: 1024px) {
+  .navbar-height {
+    height: 6rem;}
+    /* 96px */
+  
+/*
+  .page-height {
+    height: calc(100vh - 6rem);
+  }
+} */

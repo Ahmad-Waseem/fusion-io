@@ -7,6 +7,8 @@
   --web-secondary: #f19143;/*sandy brown*/
   --background: #fffcef;/*ivory*/
   --text-color: #2b303a;/*gun black*/
+  --heading-font: 'Secular One', sans-serif; /* Heading font */
+  --common-font: 'Open Sans', sans-serif; /* Common font */
 }
 
 body {
