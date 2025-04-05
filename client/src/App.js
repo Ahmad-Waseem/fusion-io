@@ -1,19 +1,20 @@
 import './App.css';
-import StickyNavbar from './components/navbar/StickyNavbar';
-import AuthPage from './pages/session/Auth';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './components/navbar/Layout';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import LoginPage from './pages/auth/Login';
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        {/* <StickyNavbar /> */}
+
+    <BrowserRouter>
+      <Layout>
         <Routes>
-          {/* Define your route for the Auth page */}
-          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/Auth" element={<AuthPage />} />
         </Routes>
-      </Router>
-    </div>
+      </Layout>
+    </BrowserRouter>
+
   );
 }
 
