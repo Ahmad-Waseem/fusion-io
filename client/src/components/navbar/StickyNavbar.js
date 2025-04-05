@@ -21,6 +21,7 @@ const StickyNavbar = () => {
               <img
                 className="h-7 w-auto"
                 src="https://placehold.co/600x400"
+                alt="logo"
               />
               <p className="sr-only">Fusion-io</p>
             </a>
