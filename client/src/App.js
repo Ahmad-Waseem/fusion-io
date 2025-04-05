@@ -1,14 +1,10 @@
 import './App.css';
-import StickyNavbar from './components/navbar/StickyNavbar';
+import LoginPage from './pages/auth/Login';
 
 function App() {
   return (
-    <div className="App">
-      <StickyNavbar/>
-      <div className="text-3xl font-bold text-blue-500">
-      Tailwind CSS is working!
-    
-    </div>
+    <div className="App h-full">
+      <LoginPage />
     </div>
   );
 }
