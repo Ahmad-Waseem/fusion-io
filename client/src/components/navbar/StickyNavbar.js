@@ -1,9 +1,14 @@
 import { useState } from 'react';
-import styles from './StickyNavbar.module.css'
+import styles from './StickyNavbar.module.css';
 
-
-
-
+function Button() {
+  return (
+    <button className={styles.button} data-text="Awesome">
+      <span className={styles.actualText}>&nbsp;&nbsp;FUSION.IO&nbsp;</span>
+      <span aria-hidden="true" className={styles.hoverText} >&nbsp;&nbsp;FUSION.IO&nbsp;</span>
+    </button>
+  );
+}
 
 const StickyNavbar = () => {
   const theme = {
@@ -22,7 +27,7 @@ const StickyNavbar = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex shrink-0">
-            <Logo/>
+            <Button/>
           </div>
 
           {/* Desktop Nav*/}
@@ -35,7 +40,6 @@ const StickyNavbar = () => {
             <a className="inline-block rounded-lg px-2 py-1 text-sm font-medium text-gray-900 transition-all duration-200 hover:bg-gray-100"
               href="#"
               style={{ color: theme.text }}>
-              {/* More links here if needed */}
             </a>
           </div>
 
@@ -91,7 +95,7 @@ const StickyNavbar = () => {
             The Lore
           </a>
           <a className="block text-sm font-medium text-gray-900 hover:bg-gray-100 rounded-lg px-2 py-1" href="#">
-            Pricing
+            if needed
           </a>
           <a
             className="block text-sm font-medium text-gray-900 hover:bg-gray-100 rounded-lg px-2 py-1"
