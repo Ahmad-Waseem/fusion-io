@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./Auth.css";
 
-
 /* CHANGE THE API PATHS */
 
 const HostAuthPage = () => {
@@ -84,7 +83,6 @@ const HostAuthPage = () => {
 
         // Check if passwords match
         if (password !== confirmPassword) {
-
             triggerInvalidField(passwordRef);
             triggerInvalidField(confirmPasswordRef);
             return;
@@ -110,26 +108,27 @@ const HostAuthPage = () => {
                 console.error("Error:", error);
                 alert("An error occurred. Please try again.");
             }
-        }
-        else {
+        } else {
             return;
         }
     };
 
     return (
-        <div className="flex h-screen relative">
+        <div className="flex flex-col sm:flex-row h-screen relative">
             {/* The Fill Box (moves left and right, color changes) */}
             <div
-                className={`fill-box w-1/2 absolute z-50 top-0 bottom-0 transition-all duration-700 ${isSignUp ? "translate-x-[100%] bg-[var(--host-primary)]" : "bg-[var(--web-secondary)]"
+                className={`fill-box w-full sm:w-1/2 absolute z-50 top-0 bottom-0 transition-all duration-700 ${isSignUp
+                    ? "bg-[var(--host-primary)] sm:translate-x-[100%] lg:translate-x-[100%]"
+                    : "bg-[var(--web-secondary)]"
                     }`}
             >
-                <div className={`absolute text-white font-bold text-4xl ${isSignUp ? "right-8 bottom-8" : "top-8 left-8"}`} >
+                <div className={`absolute text-white font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl ${isSignUp ? "right-4 bottom-4 sm:right-8 sm:bottom-8" : "top-4 left-4 sm:top-8 sm:left-8"}`} >
                     <Link to="/">{isSignUp ? "Host Impactful Events." : "Welcome, to the HQ!"}</Link>
                 </div>
             </div>
 
             {/* Container for both Login and Signup Forms (positioned on left or right half) */}
-            <div className={`w-1/2 flex justify-center items-center absolute top-0 bottom-0 ${!isSignUp ? 'right-0' : 'left-0'}`}>
+            <div className={`w-full sm:w-1/2 flex justify-center items-center absolute top-0 bottom-0 ${!isSignUp ? 'right-0' : 'left-0'}`}>
                 {/* Login Form */}
                 <div
                     className={`card transition-all duration-400 absolute ${isSignUp ? "opacity-0 pointer-events-none" : "opacity-100 relative"}`}
