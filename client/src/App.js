@@ -6,6 +6,7 @@ import AuthPage from './pages/session/Auth';
 import HomePage from './pages/home/HomePage';
 import ProfilePage from './pages/profile/ProfilePage';
 import HostAuthPage from './pages/hostSession/Auth';
+import ParticipantDashboard from './pages/dashboard/Participant';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route element={<Layout/>}>
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/profile" element={<ProfilePage/>} />
+          <Route path="/dashboard" element={<ParticipantDashboard/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
