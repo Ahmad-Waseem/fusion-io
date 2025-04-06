@@ -1,0 +1,72 @@
+.input-wrapper {
+    width: 80%;
+    margin: 1.5rem auto;
+    font-family: var(--common-font);
+  }
+  
+  .form-control {
+    position: relative;
+    width: 100%;
+    margin: 20px 0 40px;
+  }
+  
+  .form-control input {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid var(--text-color);
+    width: 100%;
+    padding: 15px 0;
+    font-size: 18px;
+    color: var(--text-color);
+    font-family: var(--common-font);
+  }
+  
+  .form-control input:focus,
+  .form-control input:valid {
+    outline: none;
+    border-bottom-color: var(--web-secondary);
+  }
+  
+  .form-control label {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    pointer-events: none;
+    font-family: var(--common-font);
+  }
+  
+  .form-control label span {
+    display: inline-block;
+    font-size: 18px;
+    min-width: 5px;
+    color: var(--text-color);
+    transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  
+  .form-control input:focus + label span,
+  .form-control input:valid + label span {
+    color: var(--web-secondary);
+    transform: translateY(-30px);
+  }
+  
+  .submit-btn {
+    position: absolute;
+    right: 0;
+    bottom: 8px;
+    padding: 5px 10px;
+    background-color: var(--web-secondary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--common-font);
+    cursor: pointer;
+  }
+
+  .submit-btn:hover {
+    background-color: darkgoldenrod; /* Can darken if you want */
+  }
+  
+  .submit-btn:active {
+    transform: scale(0.95);
+  }
+  
