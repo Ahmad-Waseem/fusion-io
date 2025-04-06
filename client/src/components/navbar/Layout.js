@@ -1,6 +1,8 @@
+// components/navbar/Layout.js
 import StickyNavbar from "./StickyNavbar";
+import { Outlet } from 'react-router-dom'; 
 
-export default function Layout({ children }) {
+export default function Layout() {
   return (
     <div className="min-h-screen">
 
@@ -9,7 +11,7 @@ export default function Layout({ children }) {
       </div>
 
       <main className="page-height">
-        {children}
+        <Outlet /> 
       </main>
 
     </div>
