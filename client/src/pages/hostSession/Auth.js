@@ -1,8 +1,11 @@
 import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
-import "./Auth.css"; // Import your custom styles
+import { Link } from "react-router-dom";
+import "./Auth.css";
 
-const AuthPage = () => {
+
+/* CHANGE THE API PATHS */
+
+const HostAuthPage = () => {
     const [isSignUp, setIsSignUp] = useState(false);
     const usernameRef = useRef(null);
     const fullNameRef = useRef(null);
@@ -117,11 +120,11 @@ const AuthPage = () => {
         <div className="flex h-screen relative">
             {/* The Fill Box (moves left and right, color changes) */}
             <div
-                className={`fill-box w-1/2 absolute z-50 top-0 bottom-0 transition-all duration-700 ${isSignUp ? "translate-x-[100%] bg-[var(--candidate-primary)]" : "bg-[var(--web-secondary)]"
+                className={`fill-box w-1/2 absolute z-50 top-0 bottom-0 transition-all duration-700 ${isSignUp ? "translate-x-[100%] bg-[var(--host-primary)]" : "bg-[var(--web-secondary)]"
                     }`}
             >
                 <div className={`absolute text-white font-bold text-4xl ${isSignUp ? "right-8 bottom-8" : "top-8 left-8"}`} >
-                    <Link to="/">{isSignUp ? "Bonjour." : "Welcome Back!"}</Link>
+                    <Link to="/">{isSignUp ? "Host Impactful Events." : "Welcome, to the HQ!"}</Link>
                 </div>
             </div>
 
@@ -158,7 +161,7 @@ const AuthPage = () => {
 
                     <div className="form-grid">
                         <div className="inputBox">
-                            <input type="text" required placeholder="e.g. XD101" name="username" ref={usernameRef} />
+                            <input type="text" required placeholder="e.g. Mike" name="username" ref={usernameRef} />
                             <span>Username</span>
                         </div>
 
@@ -193,4 +196,4 @@ const AuthPage = () => {
     );
 };
 
-export default AuthPage;
+export default HostAuthPage;

@@ -15,7 +15,8 @@ const HomePage = () => {
                 <div>
                     <h1 className="text-4xl md:text-5xl font-bold mb-4">Welcome to Fusion-io</h1>
                     <p className="text-lg md:text-xl mb-6 typewriter-animation">
-                        it's okay! I donno what to write too...
+                        &lt;it&#39;s okay! I donno what to write either.../&gt;
+                    
                     </p>
 
                     <style jsx>{`
@@ -58,7 +59,7 @@ const HomePage = () => {
                                 <div><span className="bg-purple-500 inline-block w-3 h-3 rounded-full"></span></div>
                                 <div><span className="bg-pink-500 inline-block w-3 h-3 rounded-full"></span></div>
                             </div>
-                            <div className="card__content mt-4"> <ul className="space-y-3 text-lg text-[var(--text-color)]">
+                            <div className="card__content mt-4 " style={{ fontFamily: 'var(--common-font)' }}> <ul className="space-y-3 text-lg text-[var(--text-color)]">
                                 <li>Hackathon</li>
                                 <li>Jobs</li>
                                 <li>Friends</li>
@@ -72,7 +73,7 @@ const HomePage = () => {
                                 <div><span className="bg-yellow-500 inline-block w-3 h-3 rounded-full"></span></div>
                                 <div><span className="bg-green-500 inline-block w-3 h-3 rounded-full"></span></div>
                             </div>
-                            <div className="card__content mt-4"><ul className="space-y-3 text-lg text-[var(--text-color)]">
+                            <div className="card__content mt-4" style={{ fontFamily: 'var(--common-font)' }}><ul className="space-y-3 text-lg text-[var(--text-color)]">
                                 <li>Employees</li>
                                 <li>Hearts</li>
                                 <li>Legacy</li>

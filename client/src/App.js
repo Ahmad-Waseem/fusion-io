@@ -4,8 +4,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/auth/Login';
 import AuthPage from './pages/session/Auth';
 import HomePage from './pages/home/HomePage';
-import HostAuthPage from './pages/hostSession/Auth';
-import ProfilePage from './pages/profile/ProfilePage';
 
 function App() {
   return (
