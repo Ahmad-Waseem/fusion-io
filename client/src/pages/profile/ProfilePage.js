@@ -11,6 +11,7 @@ export default function ProfilePage() {
     profilePic: "https://via.placeholder.com/100",
   });
 
+
   const [imagePreview, setImagePreview] = useState(formData.profilePic);
 
   const hackathons = [
