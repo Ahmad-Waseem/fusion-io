@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'; // Import Link
 
 function Button() {
   return (
-    <button className={styles.button}>
+    <Link to="/" className={styles.button}>
       <span className={styles.actualText}>&nbsp;&nbsp;FUSION.IO&nbsp;</span>
       <span aria-hidden="true" className={styles.hoverText} >&nbsp;&nbsp;FUSION.IO&nbsp;</span>
-    </button>
+    </Link>
   );
 }
 
