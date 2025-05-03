@@ -1,14 +1,18 @@
-import connectToDB from "./config/db.js"
-import express from "express"
-import dotenv from "dotenv"
+const connectToDB = require('./config/db.js')
+const express= require('express')
+const dotenv = require('dotenv')
+const authRouter = require('./routes/authRoutes')
 
 dotenv.config()
 
 const app = express()
+app.use(express.json())
 
 app.get('/', (req, res) => {
     res.send("Hello world")
 })
+
+app.use('/api/auth', authRouter)
 
 connectToDB()
 	.then(() => {
