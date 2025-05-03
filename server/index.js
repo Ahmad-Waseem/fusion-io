@@ -4,6 +4,7 @@ const dotenv = require('dotenv')
 const authRouter = require('./routes/authRoutes')
 const userRouter = require('./routes/userRoutes.js')
 const hackathonRouter = require('./routes/hackathonRoutes.js')
+const messageRouter = require('./routes/messageRoutes.js')
 
 dotenv.config()
 
@@ -17,6 +18,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRouter)
 app.use('/api/user', userRouter)
 app.use('/api/hackathon', hackathonRouter)
+app.use('/api/message', messageRouter)
 
 connectToDB()
 	.then(() => {
