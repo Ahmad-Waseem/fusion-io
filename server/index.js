@@ -2,6 +2,7 @@ const connectToDB = require('./config/db.js')
 const express= require('express')
 const dotenv = require('dotenv')
 const authRouter = require('./routes/authRoutes')
+const userRouter = require('./routes/userRoutes.js')
 
 dotenv.config()
 
@@ -13,6 +14,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/auth', authRouter)
+app.use('/api/user', userRouter)
 
 connectToDB()
 	.then(() => {
