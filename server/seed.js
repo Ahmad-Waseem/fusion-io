@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Hackathon = require('./models/hackathon');
-const User = require('./models/user');
+const User = require('./models/User');
 
 const sampleHackathons = [
     {

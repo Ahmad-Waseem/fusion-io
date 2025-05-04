@@ -8,6 +8,7 @@ import ProfilePage from './pages/profile/ProfilePage';
 import HostAuthPage from './pages/hostSession/Auth';
 import ParticipantDashboard from './pages/dashboard/Participant';
 import HackathonDetailPage from './pages/hackathon/HackathonDetailPage';
+import Announcement from './pages/announcement/Announcement';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage/>} />
           <Route path="/dashboard" element={<ParticipantDashboard/>}/>
           <Route path="/hackathon/:id" element={<HackathonDetailPage />} />
+          <Route path="/announcements" element={<Announcement />} />
         </Route>
       </Routes>
     </BrowserRouter>

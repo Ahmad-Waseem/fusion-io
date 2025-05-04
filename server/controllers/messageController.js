@@ -1,4 +1,4 @@
-const Message = require('../models/Messaage')
+const Message = require('../models/Message')
 
 const getMessagesForHackathon = async (req, res) => {
   const messages = await Message.find({ hackathon: req.params.hackathonId })
