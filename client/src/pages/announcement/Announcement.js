@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 
@@ -27,97 +27,81 @@ function Announcement() {
         },
     ]);
     const [newMessage, setNewMessage] = useState('');
-    const [userRole, setUserRole] = useState('participant'); // Sample user role
+    const [userRole, setUserRole] = useState('participant'); // Sample user role: organizer
+    useEffect(() => {
+        fetchMessages();
+    }, []);
 
-    // useEffect(() => {
-    //     fetchMessages();
-    // }, []);
+    const fetchMessages = async () => {
+        try {
+            //hackathon_id
+            //const response = await fetch('http://localhost:4000/api/'+ hackathon_id +'/message');
+            const response = await fetch('http://localhost:4000/api/message');
+            if (!response.ok) {
+                const message = `An error occurred: ${response.status}`;
+                throw new Error(message);
+            }
+            const resJson = await response.json();
+            // Sort messages by creation date (earliest to latest)
+            const sortedMessages = resJson.data.sort((a, b) =>
+                new Date(a.createdAt) - new Date(b.createdAt)
+            );
+            setMessages(sortedMessages);
+            setLoading(false);
+        } catch (err) {
+            setError('Failed to fetch messages');
+            setLoading(false);
+            console.error('Error fetching messages:', err);
+        }
+    };
 
-    // const fetchMessages = async () => {
-    //     try {
-    //         const response = await fetch('http://localhost:4000/api/message');
-    //         if (!response.ok) {
-    //             const message = `An error occurred: ${response.status}`;
-    //             throw new Error(message);
-    //         }
-    //         const resJson = await response.json();
-    //         // Sort messages by creation date (earliest to latest)
-    //         const sortedMessages = resJson.data.sort((a, b) =>
-    //             new Date(a.createdAt) - new Date(b.createdAt)
-    //         );
-    //         setMessages(sortedMessages);
-    //         setLoading(false);
-    //     } catch (err) {
-    //         setError('Failed to fetch messages');
-    //         setLoading(false);
-    //         console.error('Error fetching messages:', err);
-    //     }
-    // };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!newMessage.trim()) return;
 
-        const newMessageObject = {
-            _id: `hardcoded-${Date.now()}`, // Simple unique ID for testing
-            content: newMessage,
-            createdAt: new Date().toISOString(),
-            sender: { name: 'Local Organizer' },
-        };
+        try {
+            const response = await fetch('http://localhost:4000/api/message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    content: newMessage,
+                    hackathon: 'current-hackathon-id' //dynamic based on the current hackathon
+                }),
+            });
 
-        setMessages([...messages, newMessageObject]);
-        setNewMessage('');
-        console.log('New message posted:', newMessageObject);
-        // In a real scenario, you would call your API here
+            if (!response.ok) {
+                const message = `An error occurred: ${response.status}`;
+                throw new Error(message);
+            }
+
+            setNewMessage('');
+            fetchMessages(); // Refresh messages
+        } catch (err) {
+            console.error('Error sending message:', err);
+            alert('Failed to send message. Please try again.');
+        }
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     if (!newMessage.trim()) return;
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    //     try {
-    //         const response = await fetch('http://localhost:4000/api/message', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify({
-    //                 content: newMessage,
-    //                 hackathon: 'current-hackathon-id' // This should be dynamic based on the current hackathon
-    //             }),
-    //         });
+    if (loading) {
+        return (
+            <div className="pt-32 text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[var(--host-primary)] mx-auto"></div>
+            </div>
+        );
+    }
 
-    //         if (!response.ok) {
-    //             const message = `An error occurred: ${response.status}`;
-    //             throw new Error(message);
-    //         }
-
-    //         setNewMessage('');
-    //         fetchMessages(); // Refresh messages
-    //     } catch (err) {
-    //         console.error('Error sending message:', err);
-    //         alert('Failed to send message. Please try again.');
-    //     }
-    // };
-
-    // const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState(null);
-
-    // if (loading) {
-    //     return (
-    //         <div className="pt-32 text-center">
-    //             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[var(--host-primary)] mx-auto"></div>
-    //         </div>
-    //     );
-    // }
-
-    // if (error) {
-    //     return (
-    //         <div className="pt-32 text-center text-red-500">
-    //             {error}
-    //         </div>
-    //     );
-    // }
+    if (error) {
+        return (
+            <div className="pt-32 text-center text-red-500">
+                {error}
+            </div>
+        );
+    }
 
     return (
         <div className="pt-32 mx-[5%]" style={{ fontFamily: 'var(--common-font)' }}>
