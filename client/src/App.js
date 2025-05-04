@@ -10,6 +10,7 @@ import ParticipantDashboard from './pages/dashboard/Participant';
 import HackathonDetailPage from './pages/hackathon/HackathonDetailPage';
 import Announcement from './pages/announcement/Announcement';
 import HostDashboard from './pages/dashboard/Host';
+import CreateHackathon from './pages/hackathon/CreateHackathon';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage/>} />
           <Route path="/dashboard" element={<ParticipantDashboard/>}/>
           <Route path="/host-dashboard" element={<HostDashboard/>}/>
+          <Route path="/create-hackathon" element={<CreateHackathon/>}/>
           <Route path="/hackathon/:id" element={<HackathonDetailPage />} />
           <Route path="/announcements" element={<Announcement />} />
         </Route>
