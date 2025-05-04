@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Hackathon = require('./models/hackathon');
-const User = require('./models/User');
+const User = require('./models/user');
 
 const sampleHackathons = [
     {
@@ -44,7 +44,7 @@ const sampleHackathons = [
 const seedDatabase = async () => {
     try {
         // Connect to MongoDB
-        await mongoose.connect('mongodb://127.0.0.1:27017/fusion-io', {
+        await mongoose.connect('mongodb+srv://admin:pass123@fuse.ihgutie.mongodb.net/?retryWrites=true&w=majority&appName=fuse', {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
@@ -56,11 +56,6 @@ const seedDatabase = async () => {
         console.log('Cleared existing hackathons');
 
         // Create a sample organizer
-        /*const organizer = await User.findOne({ role: 'organizer' });
-        if (!organizer) {
-            console.log('Please create an organizer user first');
-            process.exit(1);
-        }*/
         const organizer = new User({
             name: "TechGiants Inc.",
             email: "organizer@techgiants.com",

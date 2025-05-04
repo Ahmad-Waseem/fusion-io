@@ -15,6 +15,11 @@ const hackathonSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  details:
+  {
+    type: String,
+    required: true
+  },
   startDate: {
     type: Date,
     required: true
@@ -88,7 +93,6 @@ const hackathonSchema = new mongoose.Schema({
     enum: ['upcoming', 'ongoing', 'completed'],
     default: 'upcoming'
   },
-  // Add other relevant fields like location, rules, prizes (general), etc.
 }, { timestamps: true });
 
 const Hackathon = mongoose.model('Hackathon', hackathonSchema);

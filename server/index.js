@@ -23,7 +23,7 @@ app.use('/api/message', messageRouter)
 connectToDB()
 	.then(() => {
 		app.listen(process.env.PORT, () => {
-		    console.log("Connected to Database and Server running on PORT " + process.env.PORT)
+		    console.log("Connected to Database and Server running on PORT " + process.env.PORT + process.env.MONGO_URI)
 		})
 	})
 	.catch((error) => {
