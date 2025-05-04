@@ -1,6 +1,9 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import "./Auth.css"; // Import your custom styles
+import { useDispatch } from "react-redux";
+import { login } from "../../slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const AuthPage = () => {
     const [isSignUp, setIsSignUp] = useState(false);
@@ -11,6 +14,9 @@ const AuthPage = () => {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const confirmPasswordRef = useRef(null);
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const openLogin = () => {
         setIsSignUp(false); // Revert to login
@@ -88,18 +94,19 @@ const AuthPage = () => {
         }
         if (username && fullName && email && password && confirmPassword) {
             try {
-                const response = await fetch("https://fake-api.com/signup", {
+                const response = await fetch("http://localhost:4000/api/auth/register", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ username, fullName, email, password }),
+                    body: JSON.stringify({ name: fullName, username, email, password, role:"" }),
                 });
 
                 if (response.ok) {
                     const data = await response.json();
-                    console.log("Signup successful", data);
-                    // Redirect or take appropriate action after successful signup
+                    dispatch(login(data))
+                    navigate('/dashboard')
+
                 } else {
                     alert("Sign up failed");
                 }
