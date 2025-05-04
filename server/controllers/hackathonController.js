@@ -1,4 +1,4 @@
-const Hackathon = require('../models/Hackathon');
+const Hackathon = require('../models/hackathon');
 
 const getAllHackathons = async (req, res) => {
   const hackathons = await Hackathon.find()
@@ -7,7 +7,8 @@ const getAllHackathons = async (req, res) => {
     .populate('sponsors')
     .populate('participants')
     .populate('teams');
-  res.json(hackathons);
+  
+    res.json(hackathons);
 };
 
 const getHackathonById = async (req, res) => {

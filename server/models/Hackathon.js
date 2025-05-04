@@ -26,6 +26,19 @@ const hackathonSchema = new mongoose.Schema({
   bannerImage: {
     type: String // URL or path to the banner image
   },
+  prize: {
+    type: String,
+    required: true
+  },
+  difficulty: {
+    type: String,
+    enum: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
+    required: true
+  },
+  majorRule: {
+    type: String,
+    required: true
+  },
   discordInviteUrl: {
     type: String
   },
@@ -70,6 +83,11 @@ const hackathonSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Team' // Reference to teams participating in the hackathon
   }],
+  status: {
+    type: String,
+    enum: ['upcoming', 'ongoing', 'completed'],
+    default: 'upcoming'
+  },
   // Add other relevant fields like location, rules, prizes (general), etc.
 }, { timestamps: true });
 
