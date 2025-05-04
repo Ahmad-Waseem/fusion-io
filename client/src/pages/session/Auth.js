@@ -45,7 +45,7 @@ const AuthPage = () => {
 
         if (email && password) {
             try {
-                const response = await fetch("https://fake-api.com/login", {
+                const response = await fetch("http://localhost:4000/api/auth/login", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -55,8 +55,9 @@ const AuthPage = () => {
 
                 if (response.ok) {
                     const data = await response.json();
-                    console.log("Login successful", data);
-                    // Redirect or take appropriate action after successful login
+                    dispatch(login(data))
+                    console.log(data)
+                    navigate('/dashboard')
                 } else {
                     alert("Login failed");
                 }
