@@ -5,10 +5,12 @@ const authRouter = require('./routes/authRoutes')
 const userRouter = require('./routes/userRoutes.js')
 const hackathonRouter = require('./routes/hackathonRoutes.js')
 const messageRouter = require('./routes/messageRoutes.js')
+const cors = require('cors')
 
 dotenv.config()
 
 const app = express()
+app.use(cors())
 app.use(express.json())
 
 app.get('/', (req, res) => {
