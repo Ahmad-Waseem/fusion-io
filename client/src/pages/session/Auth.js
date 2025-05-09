@@ -103,6 +103,7 @@ const AuthPage = () => {
                     body: JSON.stringify({ name: fullName, username, email, password, role:"" }),
                 });
 
+                console.log(response)
                 if (response.ok) {
                     const data = await response.json();
                     dispatch(login(data))

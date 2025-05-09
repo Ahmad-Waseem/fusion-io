@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
     trim: true,
-    unqiue: true,
+    unique: true,
   },
 
   email: {
@@ -33,6 +33,6 @@ const userSchema = new mongoose.Schema({
   }
 
 }, { timestamps: true }); 
-const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+module.exports = mongoose.models.User || mongoose.model('User', userSchema);
+

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import FancyInput from '../../components/input/FancyInput';
+import { useSelector } from 'react-redux'; // Import useSelector
 
 function CreateHackathon() {
     const navigate = useNavigate();
@@ -18,16 +19,36 @@ function CreateHackathon() {
         minTeamSize: 1,
         maxTeamSize: 4,
         maxSponsors: 0,
-        maxParticipantCount: 100
+        maxParticipantCount: 100,
+        organizer: null // Initialize organizer in formData
     });
 
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const user = useSelector((state) => state.auth.user);
+
+    useEffect(() => {
+        // Redirect if user is not logged in
+        if (!isAuthenticated) {
+            console.log("User not authenticated, redirecting to /host-auth");
+            navigate('/host-auth');
+            return;
+        }
+
+        if (user?._id) {
+            setFormData(prev => ({
+                ...prev,
+                organizer: user._id
+            }));
+            console.log("Organizer ID set in formData:", user._id);
+        }
+    }, [isAuthenticated, user?._id, navigate]);
 
     const validateForm = () => {
         console.log("0")
         const newErrors = {};
-        
+
         if (!formData.title.trim()) newErrors.title = 'Title is required';
         if (!formData.description.trim()) newErrors.description = 'Description is required';
         if (!formData.details.trim()) newErrors.details = 'Details are required';
@@ -35,11 +56,11 @@ function CreateHackathon() {
         if (!formData.endDate) newErrors.endDate = 'End date is required';
         if (!formData.prize.trim()) newErrors.prize = 'Prize is required';
         if (!formData.majorRule.trim()) newErrors.majorRule = 'Major rule is required';
-        
+
         if (formData.minTeamSize > formData.maxTeamSize) {
             newErrors.teamSize = 'Minimum team size cannot be greater than maximum team size';
         }
-        
+
         if (new Date(formData.startDate) >= new Date(formData.endDate)) {
             newErrors.dateRange = 'End date must be after start date';
         }
@@ -68,7 +89,7 @@ function CreateHackathon() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("entred")
-        
+
         if (!validateForm()) {
             console.log("0.1")
             return;
@@ -78,7 +99,7 @@ function CreateHackathon() {
         console.log("here")
         try {
             console.log(formData)
-            const response = await fetch('http://localhost:4000/api/hackathons', {
+            const response = await fetch('http://localhost:4000/api/hackathon', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -95,11 +116,15 @@ function CreateHackathon() {
             navigate('/host-dashboard');
         } catch (error) {
             console.error('Error creating hackathon:', error);
-            setErrors({ submit: 'Failed to create hackathon. Please try again.' });
+            setErrors({ submit: error.message || 'Failed to create hackathon. Please try again.' });
         } finally {
             setIsSubmitting(false);
         }
     };
+
+    if (!isAuthenticated) {
+        return null; // Component will not render if not authenticated (redirection happens in useEffect)
+    }
 
     return (
         <div className="pt-32 mx-[5%]" style={{ fontFamily: 'var(--common-font)' }}>
@@ -118,7 +143,7 @@ function CreateHackathon() {
                         <h2 className="text-2xl font-semibold mb-6 text-[var(--text-color)]" style={{ fontFamily: 'var(--heading-font)' }}>
                             Basic Information
                         </h2>
-                        
+
                         <div className="space-y-6">
                             <FancyInput
                                 label="Title"
@@ -127,7 +152,7 @@ function CreateHackathon() {
                                 onChange={handleFancyChange}
                                 error={errors.title}
                             />
-                            
+
                             <div>
                                 <label className="block text-sm font-medium text-[var(--text-color)] mb-2">
                                     Description
@@ -167,7 +192,7 @@ function CreateHackathon() {
                         <h2 className="text-2xl font-semibold mb-6 text-[var(--text-color)]" style={{ fontFamily: 'var(--heading-font)' }}>
                             Schedule & Prize
                         </h2>
-                        
+
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label className="block text-sm font-medium text-[var(--text-color)] mb-2">
@@ -235,7 +260,7 @@ function CreateHackathon() {
                         <h2 className="text-2xl font-semibold mb-6 text-[var(--text-color)]" style={{ fontFamily: 'var(--heading-font)' }}>
                             Rules & Settings
                         </h2>
-                        
+
                         <div className="space-y-6">
                             <div>
                                 <label className="block text-sm font-medium text-[var(--text-color)] mb-2">
@@ -360,4 +385,4 @@ function CreateHackathon() {
     );
 }
 
-export default CreateHackathon; 
+export default CreateHackathon;

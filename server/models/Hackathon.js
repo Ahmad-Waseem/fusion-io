@@ -13,7 +13,8 @@ const hackathonSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true
+    required: true,
+    maxlength: 200,
   },
   details:
   {

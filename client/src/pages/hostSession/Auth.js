@@ -1,8 +1,12 @@
 import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { login } from '../../slices/authSlice';
 import "./Auth.css";
 
 /* CHANGE THE API PATHS */
+
+const API_BASE_URL = 'http://localhost:4000/api';
 
 const HostAuthPage = () => {
     const [isSignUp, setIsSignUp] = useState(false);
@@ -13,6 +17,8 @@ const HostAuthPage = () => {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const confirmPasswordRef = useRef(null);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const openLogin = () => {
         setIsSignUp(false); // Revert to login
@@ -41,7 +47,7 @@ const HostAuthPage = () => {
 
         if (email && password) {
             try {
-                const response = await fetch("https://fake-api.com/login", {
+                const response = await fetch(`${API_BASE_URL}/auth/login`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -51,10 +57,13 @@ const HostAuthPage = () => {
 
                 if (response.ok) {
                     const data = await response.json();
+                    dispatch(login(data));
                     console.log("Login successful", data);
                     // Redirect or take appropriate action after successful login
+                    navigate('/host-dashboard');
                 } else {
-                    alert("Login failed");
+                    const errorData = await response.json();
+                    alert(errorData.message || "Login failed");
                 }
             } catch (error) {
                 console.error("Error:", error);
@@ -89,20 +98,30 @@ const HostAuthPage = () => {
         }
         if (username && fullName && email && password && confirmPassword) {
             try {
-                const response = await fetch("https://fake-api.com/signup", {
+                const response = await fetch(`${API_BASE_URL}/auth/register`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ username, fullName, email, password }),
+                    body: JSON.stringify({ 
+                        username, 
+                        name: fullName, 
+                        email, 
+                        password,
+                        role: 'organizer' // Since this is the host signup page
+                    }),
                 });
 
                 if (response.ok) {
+                    
                     const data = await response.json();
+                    dispatch(login(data));
                     console.log("Signup successful", data);
+                    navigate('/host-dashboard');
                     // Redirect or take appropriate action after successful signup
                 } else {
-                    alert("Sign up failed");
+                    const errorData = await response.json();
+                    alert(errorData.message || "Sign up failed");
                 }
             } catch (error) {
                 console.error("Error:", error);

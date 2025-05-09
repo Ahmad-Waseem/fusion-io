@@ -18,8 +18,8 @@ const sponsorHackathonSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  prizeImage: {
-    type: String // URL or path to the prize image
+  prizeAmount: {
+    type: String 
   },
   // IMP: add fields for the prize description, value, etc.
 }, { timestamps: true });
